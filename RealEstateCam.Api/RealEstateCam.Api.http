@@ -1,0 +1,6 @@
+@RealEstateCam.Api_HostAddress = http://localhost:5038
+
+GET {{RealEstateCam.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
