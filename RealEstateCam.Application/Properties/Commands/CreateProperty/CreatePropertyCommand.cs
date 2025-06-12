@@ -1,6 +1,6 @@
 ﻿using RealEstateCam.Application.Abstractions.Messaging;
 
-namespace RealEstateCam.Application.Properties.CreateProperty
+namespace RealEstateCam.Application.Properties.Commands.CreateProperty
 {
     public record CreatePropertyCommand(
         string Name,
@@ -9,5 +9,5 @@ namespace RealEstateCam.Application.Properties.CreateProperty
         string CodeInternal,
         int Year,
         Guid IdOwner
-    ) : ICommand<Guid>; 
+    ) : ICommand<Guid>;
 }
