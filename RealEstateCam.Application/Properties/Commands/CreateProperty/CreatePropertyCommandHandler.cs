@@ -33,7 +33,7 @@ namespace RealEstateCam.Application.Properties.Commands.CreateProperty
                 owner.Id
             );
 
-            var result = await _propertyRepository.InsertOne( property );
+            await _propertyRepository.InsertOne( property );
 
             return property.Id;
         }

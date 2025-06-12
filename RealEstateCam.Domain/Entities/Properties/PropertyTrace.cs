@@ -35,5 +35,20 @@ namespace RealEstateCam.Domain.Entities.Properties
         {
             return new PropertyTrace(Guid.NewGuid(), dateSale, name, value, tax, idProperty);
         }
+
+        public void Update(
+            DateTime dateSale,
+            string name,
+            decimal value,
+            decimal tax,
+            Guid idProperty
+        )
+        {
+            DateSale = dateSale;
+            Name = name;
+            Value = value;
+            Tax = tax;
+            IdProperty = idProperty;
+        }
     }
 }

@@ -39,5 +39,22 @@ namespace RealEstateCam.Domain.Entities.Properties
         {
             return new Property(Guid.NewGuid(), name, address, price, codeInternal, year, idOwner);
         }
+
+        public void Update(
+            string name,
+            string address,
+            decimal price,
+            string codeInternal,
+            int year,
+            Guid idOwner
+        )
+        {
+            Name = name;
+            Address = address; 
+            Price = price;
+            CodeInternal = codeInternal;
+            Year = year;
+            IdOwner = idOwner;
+        }
     }
 }

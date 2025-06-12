@@ -8,6 +8,6 @@ namespace RealEstateCam.Domain.Interfaces.Repositories
         Task<PropertyTrace?> GetByIdAsync(Guid id);
         Task<PropertyTrace> AddAsync(PropertyTrace trace);
         Task<PropertyTrace> UpdateAsync(PropertyTrace trace);
-        Task<bool> DeleteAsync(string id);
+        Task<bool> DeleteAsync(Guid id);
     }
 }
