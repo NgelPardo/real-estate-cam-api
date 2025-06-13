@@ -9,7 +9,7 @@ namespace RealEstateCam.Application.Owners.Commands.CreateOwner
     {
         private readonly IOwnerRepository _ownerRepository;
 
-        public CreateOwnerCommandHandler(IOwnerRepository ownerRepositorys)
+        public CreateOwnerCommandHandler(IOwnerRepository ownerRepository)
         {
             _ownerRepository = ownerRepository;
         }

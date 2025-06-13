@@ -33,7 +33,8 @@ namespace RealEstateCam.Application.Users.Commands.LoginUser
 
             string token = await _jwtProvider.GenerateTokenAsync(user);
 
-            var dto = _mapper.Map<LoginDto>((user, token));
+            var userDto = _mapper.Map<UserDto>(user);
+            var dto = new LoginDto(userDto, token);
 
             return Result.Success(dto);
         }
