@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace RealEstateCam.Application.PropertyTraces.DTOs
 {
-    internal class PropertyTraceDto
+    public class PropertyTraceDto
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public Guid Id { get; set; }
+
+        [BsonElement("date_sale")]
+        public DateTime DateSale { get; set; }
+
+        [BsonElement("name")]
+        public string? Name { get; set; }
+
+        [BsonElement("value")]
+        public decimal Value { get; set; }
+
+        [BsonElement("tax")]
+        public decimal Tax { get; set; }
+
+        [BsonElement("id_property")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public Guid IdProperty { get; set; }
     }
 }

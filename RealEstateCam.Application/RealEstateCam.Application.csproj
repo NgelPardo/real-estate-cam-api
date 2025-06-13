@@ -11,11 +11,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="PropertyImages\Commands\CreatePropertyImage\" />
+    <Folder Include="PropertyImages\Commands\DeletePropertyImage\" />
+    <Folder Include="PropertyImages\DTOs\" />
+    <Folder Include="PropertyImages\Queries\" />
+    <Folder Include="Properties\Commands\DeleteProperty\" />
+    <Folder Include="Properties\Commands\UpdateProperty\" />
+    <Folder Include="Properties\DTOs\" />
+    <Folder Include="PropertyTraces\Commands\CreatePropertyTrace\" />
+    <Folder Include="PropertyTraces\Commands\DeletePropertyTrace\" />
+    <Folder Include="PropertyTraces\Commands\UpdatePropertyTrace\" />
+    <Folder Include="PropertyTraces\DTOs\" />
+    <Folder Include="PropertyTraces\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="MongoDB.Bson" Version="3.4.0" />
   </ItemGroup>
 
 </Project>
