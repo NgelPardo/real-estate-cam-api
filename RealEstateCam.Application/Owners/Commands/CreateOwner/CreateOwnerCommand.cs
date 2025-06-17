@@ -5,7 +5,7 @@ namespace RealEstateCam.Application.Owners.Commands.CreateOwner
     public record CreateOwnerCommand(
         string Name,
         string Address,
-        string Photo,
+        string? Photo,
         DateTime Birthday
-        ) : ICommand<Guid>;
+    ) : ICommand<Guid>;
 }

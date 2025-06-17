@@ -17,7 +17,6 @@
     <Folder Include="PropertyImages\Queries\" />
     <Folder Include="Properties\Commands\DeleteProperty\" />
     <Folder Include="Properties\Commands\UpdateProperty\" />
-    <Folder Include="Properties\DTOs\" />
     <Folder Include="PropertyTraces\Commands\CreatePropertyTrace\" />
     <Folder Include="PropertyTraces\Commands\DeletePropertyTrace\" />
     <Folder Include="PropertyTraces\Commands\UpdatePropertyTrace\" />

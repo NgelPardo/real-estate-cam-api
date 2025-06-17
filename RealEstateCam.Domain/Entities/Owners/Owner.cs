@@ -9,7 +9,7 @@ namespace RealEstateCam.Domain.Entities.Owners
             Guid id,
             string name, 
             string address, 
-            string photo, 
+            string? photo, 
             DateTime birthday) : base(id)
         {
             Name = name;
@@ -25,7 +25,7 @@ namespace RealEstateCam.Domain.Entities.Owners
         public static Owner Create(
             string name,
             string address,
-            string photo,
+            string? photo,
             DateTime birthday
         )
         {
