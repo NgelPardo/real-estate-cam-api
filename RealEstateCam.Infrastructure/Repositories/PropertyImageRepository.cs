@@ -36,6 +36,7 @@ namespace RealEstateCam.Infrastructure.Repositories
         {
             var propertyImage = await _collection
                 .Find(x => x.IdProperty == idProperty)
+                .SortByDescending(x => x.CreatedAt)
                 .FirstOrDefaultAsync();
 
             return propertyImage;

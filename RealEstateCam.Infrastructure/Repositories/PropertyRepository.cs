@@ -32,7 +32,7 @@ namespace RealEstateCam.Infrastructure.Repositories
             return properties;
         }
 
-        public async Task<List<Property>> GetByFilters(string name, string address, decimal minPrice, decimal maxPrice)
+        public async Task<List<Property>> GetByFilters(string? name, string? address, decimal? minPrice, decimal? maxPrice)
         {
             var builder = Builders<Property>.Filter;
             var filters = new List<FilterDefinition<Property>>();
@@ -43,10 +43,13 @@ namespace RealEstateCam.Infrastructure.Repositories
             if (!string.IsNullOrWhiteSpace(address))
                 filters.Add(builder.Regex(x => x.Address, new MongoDB.Bson.BsonRegularExpression(address, "i")));
 
-            filters.Add(builder.Gte(x => x.Price, minPrice));
-            filters.Add(builder.Lte(x => x.Price, maxPrice));
+            if (minPrice.HasValue)
+                filters.Add(builder.Gte(x => x.Price, minPrice.Value));
 
-            var combinedFilter = builder.And(filters);
+            if (maxPrice.HasValue)
+                filters.Add(builder.Lte(x => x.Price, maxPrice.Value));
+
+            var combinedFilter = filters.Any() ? builder.And(filters) : builder.Empty;
 
             return await _collection.Find(combinedFilter).ToListAsync();
         }

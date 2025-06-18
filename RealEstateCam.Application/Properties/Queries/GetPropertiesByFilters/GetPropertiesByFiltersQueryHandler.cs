@@ -2,34 +2,28 @@
 using RealEstateCam.Application.Abstractions.Messaging;
 using RealEstateCam.Application.Properties.DTOs;
 using RealEstateCam.Domain.Abstractions;
+using RealEstateCam.Domain.Entities.Owners;
 using RealEstateCam.Domain.Interfaces.Repositories;
 
-namespace RealEstateCam.Application.Properties.Queries.GetAllProperties
+namespace RealEstateCam.Application.Properties.Queries.GetPropertiesByFilters
 {
-    internal sealed class GetAllPropertiesQueryHandler : IQueryHandler<GetAllPropertiesQuery, IReadOnlyList<PropertyWithExtrasDto>>
+    internal sealed class GetPropertiesByFiltersQueryHandler : IQueryHandler<GetPropertiesByFiltersQuery, IReadOnlyList<PropertyWithExtrasDto>>
     {
         private readonly IPropertyRepository _propertyRepository;
-        private readonly IOwnerRepository _ownerRepository;
-        private readonly IPropertyImageRepository _imageRepository;
+        private readonly IPropertyImageRepository _propertyImageRepository;
         private readonly IMapper _mapper;
 
-        public GetAllPropertiesQueryHandler(
-            IPropertyRepository propertyRepository, 
-            IOwnerRepository ownerRepository,
-            IPropertyImageRepository imageRepository, 
-            IMapper mapper)
+        public GetPropertiesByFiltersQueryHandler(IPropertyRepository propertyRepository, IPropertyImageRepository propertyImageRepository, IMapper mapper)
         {
+            _propertyImageRepository = propertyImageRepository;
             _propertyRepository = propertyRepository;
-            _ownerRepository = ownerRepository;
-            _imageRepository = imageRepository;
             _mapper = mapper;
         }
 
-        public async Task<Result<IReadOnlyList<PropertyWithExtrasDto>>> Handle(GetAllPropertiesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IReadOnlyList<PropertyWithExtrasDto>>> Handle(GetPropertiesByFiltersQuery request, CancellationToken cancellationToken)
         {
-            var properties = await _propertyRepository.GetAll();
-            var owners = await _ownerRepository.GetAll();
-            var images = await _imageRepository.GetAll();
+            var properties = await _propertyRepository.GetByFilters(request.Name, request.Address, request.MinPrice, request.MaxPrice);
+            var images = await _propertyImageRepository.GetAll();
 
             var latestImagesByProperty = images
                 .Where(img => img.Enabled)
@@ -41,7 +35,6 @@ namespace RealEstateCam.Application.Properties.Queries.GetAllProperties
 
             var propertyDtos = properties.Select(prop =>
             {
-                var owner = owners.FirstOrDefault(o => o.Id == prop.IdOwner);
                 var image = latestImagesByProperty.TryGetValue(prop.Id, out var img) ? img : null;
 
                 return new PropertyWithExtrasDto
@@ -53,7 +46,7 @@ namespace RealEstateCam.Application.Properties.Queries.GetAllProperties
                     CodeInternal = prop.CodeInternal,
                     Year = prop.Year,
                     IdOwner = prop.IdOwner,
-                    OwnerName = owner?.Name ?? "Sin propietario",
+                    OwnerName = "Propietario",
                     Image = image?.File ?? string.Empty
                 };
             }).ToList();

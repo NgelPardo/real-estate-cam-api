@@ -8,7 +8,7 @@ using RealEstateCam.Domain.Interfaces.Repositories;
 
 namespace RealEstateCam.Application.PropertyImages.Queries.GetPropertyImageByIdProperty
 {
-    internal sealed class GetPropertyImageByIdPropertyQueryHandler : IQueryHandler<GetPropertyImageQuery, PropertyImageDto>
+    internal sealed class GetPropertyImageByIdPropertyQueryHandler : IQueryHandler<GetPropertyImageByIdPropertyQuery, PropertyImageDto>
     {
         private readonly IPropertyImageRepository _propertyImageRepository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace RealEstateCam.Application.PropertyImages.Queries.GetPropertyImageByIdP
             _mapper = mapper;
         }
 
-        public async Task<Result<PropertyImageDto>> Handle(GetPropertyImageQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PropertyImageDto>> Handle(GetPropertyImageByIdPropertyQuery request, CancellationToken cancellationToken)
         {
-            var propertyImage = await _propertyImageRepository.GetByIdProperty(request.IdPropertyImage);
+            var propertyImage = await _propertyImageRepository.GetByIdProperty(request.IdProperty);
             if (propertyImage is null)
                 return Result.Failure<PropertyImageDto>(PropertyImageError.NotFound);
 

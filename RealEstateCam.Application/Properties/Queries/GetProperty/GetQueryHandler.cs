@@ -39,7 +39,7 @@ namespace RealEstateCam.Application.Properties.Queries.GetProperty
                 CodeInternal = property.CodeInternal,
                 Year = property.Year,
                 IdOwner = property.IdOwner,
-                ImageUrl = image?.File ?? string.Empty
+                Image = image?.File ?? string.Empty
             };
 
             return Result.Success(propertyDto);

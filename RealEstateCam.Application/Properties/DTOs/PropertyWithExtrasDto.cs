@@ -11,6 +11,6 @@
         public Guid IdOwner { get; init; }
 
         public string? OwnerName { get; init; }
-        public string? ImageUrl { get; init; }
+        public string? Image { get; init; }
     }
 }
