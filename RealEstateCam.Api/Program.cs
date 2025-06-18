@@ -56,6 +56,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseStaticFiles();
+
 app.UseCors("realStateApp");
 
 app.Run();

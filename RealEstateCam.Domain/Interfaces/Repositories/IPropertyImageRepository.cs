@@ -6,6 +6,7 @@ namespace RealEstateCam.Domain.Interfaces.Repositories
     {
         Task<PropertyImage> GetById(Guid id);
         Task<PropertyImage> GetByIdProperty(Guid idProperty);
+        Task<List<PropertyImage>> GetAll();
         Task<PropertyImage> InsertOne(PropertyImage propertyImage);
         Task<bool> DeleteOne(Guid id);
     }

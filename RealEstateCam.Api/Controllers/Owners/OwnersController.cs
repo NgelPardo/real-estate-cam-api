@@ -4,6 +4,7 @@ using RealEstateCam.Application.Owners.Commands.CreateOwner;
 using RealEstateCam.Application.Owners.DTOs;
 using RealEstateCam.Application.Owners.Queries.GetAllOwners;
 using RealEstateCam.Application.Owners.Queries.GetOwner;
+using RealEstateCam.Infrastructure.Storage;
 
 namespace RealEstateCam.Api.Controllers.Owners
 {
@@ -11,9 +12,11 @@ namespace RealEstateCam.Api.Controllers.Owners
     [Route("api/owners")]
     public class OwnersController : ControllerBase
     {
+        private readonly IFileStorage _fileStorage;
         private readonly ISender _sender;
-        public OwnersController(ISender sender)
+        public OwnersController(IFileStorage fileStorage, ISender sender)
         {
+            _fileStorage = fileStorage;
             _sender = sender;
         }
 
@@ -42,16 +45,22 @@ namespace RealEstateCam.Api.Controllers.Owners
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateOwner(
-            OwnerRequest request,
+            [FromForm] string name,
+            [FromForm] string address,
+            [FromForm] IFormFile photo,
+            [FromForm] DateTime birthday,
             CancellationToken cancellationToken
             )
         {
+            var photoUrl = await _fileStorage.SaveFileAsync(photo, "uploads");
+
             CreateOwnerCommand command = new CreateOwnerCommand(
-                request.name,
-                request.address,
-                request.photo,
-                request.birthday
+                name,
+                address,
+                photoUrl,
+                birthday
             );
 
             var result = await _sender.Send(command, cancellationToken);

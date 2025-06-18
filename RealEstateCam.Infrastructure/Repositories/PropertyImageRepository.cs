@@ -47,6 +47,14 @@ namespace RealEstateCam.Infrastructure.Repositories
 
             return propertyImage;
         }
+        public async Task<List<PropertyImage>> GetAll()
+        {
+            var propertyImages = await _collection
+                .Find(EmptyFilter())
+                .ToListAsync();
+
+            return propertyImages;
+        }
 
         private static FilterDefinition<PropertyImage> FilterByObjectId(Guid id)
         {
@@ -57,5 +65,6 @@ namespace RealEstateCam.Infrastructure.Repositories
         {
             return Builders<PropertyImage>.Filter.Empty;
         }
+
     }
 }

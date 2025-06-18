@@ -16,4 +16,8 @@
     <ProjectReference Include="..\RealEstateCam.Infrastructure\RealEstateCam.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

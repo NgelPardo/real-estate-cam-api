@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RealEstateCam.Application.Mappings;
 using RealEstateCam.Domain.Interfaces.Repositories;
 using RealEstateCam.Infrastructure.Configuration;
 using RealEstateCam.Infrastructure.Persistence;
 using RealEstateCam.Infrastructure.Repositories;
+using RealEstateCam.Infrastructure.Storage;
 
 namespace RealEstateCam.Infrastructure
 {
@@ -28,6 +30,9 @@ namespace RealEstateCam.Infrastructure
             services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
             services.AddScoped<IPropertyTraceRepository, PropertyTraceRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IFileStorage, FileSystemStorage>();
 
             services.AddAutoMapper(typeof(OwnerMappingProfile));
             services.AddAutoMapper(typeof(PropertyMappingProfile));
